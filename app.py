@@ -25,7 +25,7 @@ def verificar():
 
 @app.route('/')
 def hello_world():
-	return 'Hello World!'
+	return 'Hello World! v2'
 
 
 if __name__ == "__main__":
