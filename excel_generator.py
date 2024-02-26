@@ -35,6 +35,7 @@ def generarExcel(data):
                 if len(aux['mantenimientos']) > 0 and aux['situacion'] == 'Activo':
                     for i in aux['mantenimientos']:
                         i['departamento'] = aux['departamento']['nombre']
+                        i['nombre'] = aux['nombre']
                         docs_mantenimientos.append(i)
         elif data['departamento'] != 1000 and data['tipo'] == 0 :
             print(aux['codigo'])
@@ -42,6 +43,7 @@ def generarExcel(data):
                 if len(aux['mantenimientos']) > 0 and aux['situacion'] == 'Activo':
                     for i in aux['mantenimientos']:
                         i['departamento'] = aux['departamento']['nombre']
+                        i['nombre'] = aux['nombre']
                         docs_mantenimientos.append(i)
         elif data['departamento'] == 1000 and data['tipo'] != 0 :
             print(aux['codigo'])
@@ -49,12 +51,14 @@ def generarExcel(data):
                 if len(aux['mantenimientos']) > 0 and aux['situacion'] == 'Activo':
                     for i in aux['mantenimientos']:
                         i['departamento'] = aux['departamento']['nombre']
+                        i['nombre'] = aux['nombre']
                         docs_mantenimientos.append(i)
     
         else :
             if len(aux['mantenimientos']) > 0 and aux['situacion'] == 'Activo':
                 for i in aux['mantenimientos']:
                     i['departamento'] = aux['departamento']['nombre']
+                    i['nombre'] = aux['nombre']
                     docs_mantenimientos.append(i)
 
 
@@ -100,13 +104,13 @@ def generarExcel(data):
     #sheet.merge_cells('A1:C1')
     sheet['A5'].border = borde_negro_grueso
     sheet['A5'] = f'Año: {aux_year} Mes: {meses[aux_mes]}'
-    sheet.merge_cells('I1:L1')
-    sheet.merge_cells('I2:L2')
-    sheet.merge_cells('I3:L3')
+    sheet.merge_cells('I1:M1')
+    sheet.merge_cells('I2:M2')
+    sheet.merge_cells('I3:M3')
     sheet.merge_cells('D1:H3')
     sheet.merge_cells('A1:C3')
     sheet.merge_cells('A4:L4')
-    sheet.merge_cells('A5:L5')
+    sheet.merge_cells('A5:M5')
 
 
     # encabezados de los datos
@@ -139,10 +143,15 @@ def generarExcel(data):
     sheet['L6'].border = borde_negro_grueso
     sheet['L6'].alignment = centrar_texto
     sheet.merge_cells('L6:L7')
+    sheet['M6'] = 'Nombre'
+    sheet['M6'].border = borde_negro_grueso
+    sheet['M6'].alignment = centrar_texto
+    sheet.merge_cells('M6:M7')
     sheet.column_dimensions['I'].width = 5
     sheet.column_dimensions['J'].width = 5
     sheet.column_dimensions['K'].width = 20
     sheet.column_dimensions['L'].width = 30
+    sheet.column_dimensions['M'].width = 30
     sheet.row_dimensions[4].height = 20
 
     counter = 1
@@ -158,6 +167,8 @@ def generarExcel(data):
         sheet[f'K{counter+7}'].border = borde_negro_grueso
         sheet[f'L{counter+7}'] = i['departamento']
         sheet[f'L{counter+7}'].border = borde_negro_grueso
+        sheet[f'M{counter+7}'] = i['nombre']
+        sheet[f'M{counter+7}'].border = borde_negro_grueso
         if i['verificacion'] == True:
             sheet[f'I{counter+7}'] = 'x'
             
